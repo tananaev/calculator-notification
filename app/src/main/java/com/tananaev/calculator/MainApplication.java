@@ -47,7 +47,7 @@ public class MainApplication extends Application {
         }
 
         notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setTicker(getString(R.string.notification_title))
                 .setContent(remoteViewsSmall)
                 .setCustomBigContentView(remoteViewsLarge);

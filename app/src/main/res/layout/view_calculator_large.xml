@@ -38,7 +38,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_7"/>
+                android:text="@string/digit_7" />
 
             <TextView
                 android:id="@+id/digit_4"
@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_4"/>
+                android:text="@string/digit_4" />
 
             <TextView
                 android:id="@+id/digit_1"
@@ -58,7 +58,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_1"/>
+                android:text="@string/digit_1" />
 
             <TextView
                 android:id="@+id/button_dot"
@@ -68,7 +68,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_dot"/>
+                android:text="@string/button_dot" />
 
         </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_8"/>
+                android:text="@string/digit_8" />
 
             <TextView
                 android:id="@+id/digit_5"
@@ -96,7 +96,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_5"/>
+                android:text="@string/digit_5" />
 
             <TextView
                 android:id="@+id/digit_2"
@@ -106,7 +106,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_2"/>
+                android:text="@string/digit_2" />
 
             <TextView
                 android:id="@+id/digit_0"
@@ -116,7 +116,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_0"/>
+                android:text="@string/digit_0" />
 
         </LinearLayout>
 
@@ -134,7 +134,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_9"/>
+                android:text="@string/digit_9" />
 
             <TextView
                 android:id="@+id/digit_6"
@@ -144,7 +144,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_6"/>
+                android:text="@string/digit_6" />
 
             <TextView
                 android:id="@+id/digit_3"
@@ -154,7 +154,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/digit_3"/>
+                android:text="@string/digit_3" />
 
             <TextView
                 android:id="@+id/button_equal"
@@ -164,7 +164,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_equal"/>
+                android:text="@string/button_equal" />
 
         </LinearLayout>
 
@@ -182,7 +182,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_clear"/>
+                android:text="@string/button_clear" />
 
             <TextView
                 android:id="@+id/button_delete"
@@ -191,7 +191,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_delete"/>
+                android:text="@string/button_delete" />
 
             <TextView
                 android:id="@+id/button_divide"
@@ -200,7 +200,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_divide"/>
+                android:text="@string/button_divide" />
 
             <TextView
                 android:id="@+id/button_multiply"
@@ -209,7 +209,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_multiply"/>
+                android:text="@string/button_multiply" />
 
             <TextView
                 android:id="@+id/button_subtract"
@@ -218,7 +218,7 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_subtract"/>
+                android:text="@string/button_subtract" />
 
             <TextView
                 android:id="@+id/button_add"
@@ -227,9 +227,14 @@
                 android:gravity="center"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="@style/LargeNotificationText.Inverse"
-                android:text="@string/button_add"/>
+                android:text="@string/button_add" />
 
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="@dimen/view_large_display_padding"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
 
     </LinearLayout>
 

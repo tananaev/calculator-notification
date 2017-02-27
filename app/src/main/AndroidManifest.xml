@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.tananaev.calculator.MainApplication">
+        android:name=".MainApplication">
 
         <activity android:name="com.tananaev.calculator.MainActivity">
             <intent-filter>
@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.tananaev.calculator.MainApplication$ButtonReceiver" android:exported="false">
+        <receiver android:name=".MainApplication$ButtonReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="CalculatorButton" />
             </intent-filter>

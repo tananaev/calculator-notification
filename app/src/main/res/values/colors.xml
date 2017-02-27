@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorText">#757575</color>
+    <color name="colorTextInverse">#FAFAFA</color>
+    <color name="colorBackgroundDisplay">#FAFAFA</color>
+    <color name="colorBackgroundNumbers">#424242</color>
+    <color name="colorBackgroundOther">#757575</color>
+</resources>

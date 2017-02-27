@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="app_name">Calculator Notification</string>
+
+    <string name="notification_title">Calculator</string>
+
+    <string name="digit_0">0</string>
+    <string name="digit_1">1</string>
+    <string name="digit_2">2</string>
+    <string name="digit_3">3</string>
+    <string name="digit_4">4</string>
+    <string name="digit_5">5</string>
+    <string name="digit_6">6</string>
+    <string name="digit_7">7</string>
+    <string name="digit_8">8</string>
+    <string name="digit_9">9</string>
+
+    <string name="button_clear">AC</string>
+    <string name="button_delete">DEL</string>
+    <string name="button_dot">.</string>
+    <string name="button_equal">=</string>
+    <string name="button_divide">÷</string>
+    <string name="button_multiply">×</string>
+    <string name="button_subtract">-</string>
+    <string name="button_add">+</string>
+
+</resources>

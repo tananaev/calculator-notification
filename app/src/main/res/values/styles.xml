@@ -1,0 +1,24 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <style name="SmallNotificationText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/view_small_text_size</item>
+    </style>
+
+    <style name="SmallNotificationText.Inverse">
+        <item name="android:textColor">@color/colorTextInverse</item>
+    </style>
+
+    <style name="LargeNotificationText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/view_large_text_size</item>
+    </style>
+
+    <style name="LargeNotificationText.Inverse">
+        <item name="android:textColor">@color/colorTextInverse</item>
+    </style>
+
+</resources>

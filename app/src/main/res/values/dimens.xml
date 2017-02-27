@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- small notification is 64dp -->
+
+    <dimen name="view_small_display_padding">8dp</dimen>
+    <dimen name="view_small_display_height">22dp</dimen>
+    <dimen name="view_small_button_height">20dp</dimen>
+    <dimen name="view_small_text_size">14dp</dimen>
+
+    <!-- large notification is 256dp -->
+
+    <dimen name="view_large_display_padding">16dp</dimen>
+    <dimen name="view_large_display_height">40dp</dimen>
+    <dimen name="view_large_button_height">36dp</dimen>
+    <dimen name="view_large_text_size">18dp</dimen>
+
+</resources>

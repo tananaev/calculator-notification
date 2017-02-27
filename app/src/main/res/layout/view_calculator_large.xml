@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/view_display"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_large_display_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/view_large_display_padding"
+        android:paddingStart="@dimen/view_large_display_padding"
+        android:paddingRight="@dimen/view_large_display_padding"
+        android:paddingEnd="@dimen/view_large_display_padding"
+        android:maxLines="1"
+        android:background="@color/colorBackgroundDisplay"
+        android:textAppearance="@style/LargeNotificationText"
+        android:textColor="@color/colorText" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorBackgroundNumbers">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/digit_7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_7"/>
+
+            <TextView
+                android:id="@+id/digit_4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_4"/>
+
+            <TextView
+                android:id="@+id/digit_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_1"/>
+
+            <TextView
+                android:id="@+id/button_dot"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_dot"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/digit_8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_8"/>
+
+            <TextView
+                android:id="@+id/digit_5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_5"/>
+
+            <TextView
+                android:id="@+id/digit_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_2"/>
+
+            <TextView
+                android:id="@+id/digit_0"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_0"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/digit_9"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_9"/>
+
+            <TextView
+                android:id="@+id/digit_6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_6"/>
+
+            <TextView
+                android:id="@+id/digit_3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/digit_3"/>
+
+            <TextView
+                android:id="@+id/button_equal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_equal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/colorBackgroundOther">
+
+            <TextView
+                android:id="@+id/button_clear"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_large_button_height"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_clear"/>
+
+            <TextView
+                android:id="@+id/button_delete"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_large_button_height"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_delete"/>
+
+            <TextView
+                android:id="@+id/button_divide"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_large_button_height"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_divide"/>
+
+            <TextView
+                android:id="@+id/button_multiply"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_large_button_height"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_multiply"/>
+
+            <TextView
+                android:id="@+id/button_subtract"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_large_button_height"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_subtract"/>
+
+            <TextView
+                android:id="@+id/button_add"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_large_button_height"
+                android:gravity="center"
+                android:background="?android:selectableItemBackground"
+                android:textAppearance="@style/LargeNotificationText.Inverse"
+                android:text="@string/button_add"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

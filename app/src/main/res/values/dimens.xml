@@ -14,4 +14,6 @@
     <dimen name="view_large_button_height">36dp</dimen>
     <dimen name="view_large_text_size">18dp</dimen>
 
+    <dimen name="image_padding">8dp</dimen>
+
 </resources>

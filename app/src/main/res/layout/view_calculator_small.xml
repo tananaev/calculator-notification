@@ -4,19 +4,50 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/view_display"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_small_display_height"
-        android:gravity="center_vertical"
         android:paddingLeft="@dimen/view_small_display_padding"
         android:paddingStart="@dimen/view_small_display_padding"
         android:paddingRight="@dimen/view_small_display_padding"
         android:paddingEnd="@dimen/view_small_display_padding"
-        android:maxLines="1"
-        android:background="@color/colorBackgroundDisplay"
-        android:textAppearance="@style/SmallNotificationText"
-        android:textColor="@color/colorText" />
+        android:orientation="horizontal"
+        android:background="@color/colorBackgroundDisplay">
+
+        <TextView
+            android:id="@+id/view_display"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:background="@color/colorBackgroundDisplay"
+            android:textAppearance="@style/SmallNotificationText"
+            android:textColor="@color/colorText" />
+
+        <ImageView
+            android:id="@+id/button_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/image_padding"
+            android:paddingStart="@dimen/image_padding"
+            android:paddingRight="@dimen/image_padding"
+            android:paddingEnd="@dimen/image_padding"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_copy_small" />
+
+        <ImageView
+            android:id="@+id/button_paste"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/image_padding"
+            android:paddingStart="@dimen/image_padding"
+            android:paddingRight="@dimen/image_padding"
+            android:paddingEnd="@dimen/image_padding"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_paste_small" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

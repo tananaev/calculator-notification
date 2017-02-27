@@ -4,6 +4,8 @@ import android.app.Application;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
@@ -20,6 +22,7 @@ public class MainApplication extends Application {
     private static final String BROADCAST_NAME = "CalculatorButton";
     private static final int DECIMAL_PRECISION = 12;
 
+    private ClipboardManager clipboardManager;
     private NotificationManager notificationManager;
     private RemoteViews remoteViewsSmall;
     private RemoteViews remoteViewsLarge;
@@ -29,6 +32,7 @@ public class MainApplication extends Application {
 
     public void showNotification() {
 
+        clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         remoteViewsSmall = new RemoteViews(getPackageName(), R.layout.view_calculator_small);
         remoteViewsLarge = new RemoteViews(getPackageName(), R.layout.view_calculator_large);
@@ -37,7 +41,8 @@ public class MainApplication extends Application {
                 R.id.digit_0, R.id.digit_1, R.id.digit_2, R.id.digit_3, R.id.digit_4,
                 R.id.digit_5, R.id.digit_6, R.id.digit_7, R.id.digit_8, R.id.digit_9,
                 R.id.button_clear, R.id.button_delete, R.id.button_dot, R.id.button_equal,
-                R.id.button_divide, R.id.button_multiply, R.id.button_subtract, R.id.button_add);
+                R.id.button_divide, R.id.button_multiply, R.id.button_subtract, R.id.button_add,
+                R.id.button_copy, R.id.button_paste);
 
         for (int viewId : buttons) {
             remoteViewsSmall.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
@@ -88,6 +93,9 @@ public class MainApplication extends Application {
             case R.id.digit_8:
                 character = '8';
                 break;
+            case R.id.digit_9:
+                character = '9';
+                break;
             case R.id.button_dot:
                 character = '.';
                 break;
@@ -110,6 +118,9 @@ public class MainApplication extends Application {
     }
 
     private boolean validateCharacter(char character) {
+        if (Character.isDigit(character)) {
+            return true;
+        }
         switch (character) {
             case '.':
                 if (value.isEmpty()) {
@@ -129,7 +140,7 @@ public class MainApplication extends Application {
             case '/':
                 return !value.isEmpty() && Character.isDigit(value.charAt(value.length() - 1));
             default:
-                return true;
+                return false;
         }
     }
 
@@ -156,6 +167,26 @@ public class MainApplication extends Application {
                     break;
                 case R.id.button_equal:
                     calculateExpression();
+                    break;
+                case R.id.button_copy:
+                    ClipData clip = ClipData.newPlainText(null, value);
+                    clipboardManager.setPrimaryClip(clip);
+                    break;
+                case R.id.button_paste:
+                    if (clipboardManager.getPrimaryClip() != null) {
+                        ClipData.Item item = clipboardManager.getPrimaryClip().getItemAt(0);
+                        if (item != null) {
+                            CharSequence data = item.getText();
+                            if (data != null) {
+                                for (int i = 0; i < data.length(); i++) {
+                                    char character = data.charAt(i);
+                                    if (validateCharacter(character)) {
+                                        value += character;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     break;
                 default:
                     addCharacter(buttonId);

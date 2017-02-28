@@ -10,7 +10,9 @@
         android:theme="@style/AppTheme"
         android:name=".MainApplication">
 
-        <activity android:name="com.tananaev.calculator.MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

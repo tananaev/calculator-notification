@@ -11,8 +11,7 @@
         android:name=".MainApplication">
 
         <activity
-            android:name=".MainActivity"
-            android:noHistory="true">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

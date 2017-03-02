@@ -12,17 +12,41 @@
 
         <activity
             android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <receiver android:name=".MainApplication$ButtonReceiver" android:exported="false">
+        <receiver
+            android:name=".MainApplication$ButtonReceiver"
+            android:exported="false">
+
             <intent-filter>
                 <action android:name="CalculatorButton" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name=".MainApplication$DismissReceiver"
+            android:exported="false">
+
+            <intent-filter>
+                <action android:name="CalculatorDismiss" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".MainTileService"
+            android:icon="@drawable/ic_notification"
+            android:label="@string/notification_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
 
     </application>
 

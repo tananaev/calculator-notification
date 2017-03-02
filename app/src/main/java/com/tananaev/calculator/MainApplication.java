@@ -1,5 +1,6 @@
 package com.tananaev.calculator;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,6 +9,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.service.quicksettings.Tile;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
@@ -18,8 +20,10 @@ import java.util.List;
 public class MainApplication extends Application {
 
     private static final int NOTIFICATION_ID = 1;
+    private static final int REQUEST_DISMISS = 1;
     private static final String EXTRA_ID = "id";
-    private static final String BROADCAST_NAME = "CalculatorButton";
+    private static final String BROADCAST_BUTTON = "CalculatorButton";
+    private static final String BROADCAST_DISMISS = "CalculatorDismiss";
     private static final int DECIMAL_PRECISION = 12;
 
     private ClipboardManager clipboardManager;
@@ -27,8 +31,28 @@ public class MainApplication extends Application {
     private RemoteViews remoteViewsSmall;
     private RemoteViews remoteViewsLarge;
     private NotificationCompat.Builder notificationBuilder;
+    private Tile tile;
+    private boolean showing;
 
     private String value = "";
+
+    @SuppressLint("NewApi")
+    public void setTile(Tile tile) {
+        this.tile = tile;
+        if (tile != null) {
+            tile.setState(showing ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+            tile.updateTile();
+        }
+    }
+
+    @SuppressLint("NewApi")
+    public void setShowing(boolean showing) {
+        this.showing = showing;
+        if (this.tile != null) {
+            this.tile.setState(showing ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+            this.tile.updateTile();
+        }
+    }
 
     public void showNotification() {
 
@@ -46,20 +70,23 @@ public class MainApplication extends Application {
 
         for (int viewId : buttons) {
             remoteViewsSmall.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
-                    this, viewId, new Intent(BROADCAST_NAME).putExtra(EXTRA_ID, viewId), 0));
+                    this, viewId, new Intent(BROADCAST_BUTTON).putExtra(EXTRA_ID, viewId), 0));
             remoteViewsLarge.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
-                    this, viewId, new Intent(BROADCAST_NAME).putExtra(EXTRA_ID, viewId), 0));
+                    this, viewId, new Intent(BROADCAST_BUTTON).putExtra(EXTRA_ID, viewId), 0));
         }
 
         notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setTicker(getString(R.string.notification_title))
                 .setContent(remoteViewsSmall)
-                .setCustomBigContentView(remoteViewsLarge);
+                .setCustomBigContentView(remoteViewsLarge)
+                .setDeleteIntent(PendingIntent.getBroadcast(
+                        this, REQUEST_DISMISS, new Intent(BROADCAST_DISMISS), 0));
 
         remoteViewsSmall.setTextViewText(R.id.view_display, value);
         remoteViewsLarge.setTextViewText(R.id.view_display, value);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+        setShowing(true);
 
     }
 
@@ -195,6 +222,7 @@ public class MainApplication extends Application {
             remoteViewsSmall.setTextViewText(R.id.view_display, value);
             remoteViewsLarge.setTextViewText(R.id.view_display, value);
             notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+            setShowing(true);
 
         }
     }
@@ -205,6 +233,15 @@ public class MainApplication extends Application {
         public void onReceive(Context context, Intent intent) {
             ((MainApplication) context.getApplicationContext())
                     .handleClick(intent.getIntExtra(EXTRA_ID, 0));
+        }
+
+    }
+
+    public static class DismissReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ((MainApplication) context.getApplicationContext()).setShowing(false);
         }
 
     }

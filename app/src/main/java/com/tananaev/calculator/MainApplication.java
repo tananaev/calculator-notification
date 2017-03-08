@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.IBinder;
 import android.service.quicksettings.Tile;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
@@ -87,6 +89,8 @@ public class MainApplication extends Application {
         remoteViewsLarge.setTextViewText(R.id.view_display, value);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);
+
+        startService(new Intent(this, BackgroundService.class));
 
     }
 
@@ -222,8 +226,6 @@ public class MainApplication extends Application {
             remoteViewsSmall.setTextViewText(R.id.view_display, value);
             remoteViewsLarge.setTextViewText(R.id.view_display, value);
             notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
-            setShowing(true);
-
         }
     }
 
@@ -231,8 +233,8 @@ public class MainApplication extends Application {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            ((MainApplication) context.getApplicationContext())
-                    .handleClick(intent.getIntExtra(EXTRA_ID, 0));
+            MainApplication application = (MainApplication) context.getApplicationContext();
+            application.handleClick(intent.getIntExtra(EXTRA_ID, 0));
         }
 
     }
@@ -241,7 +243,18 @@ public class MainApplication extends Application {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            ((MainApplication) context.getApplicationContext()).setShowing(false);
+            MainApplication application = (MainApplication) context.getApplicationContext();
+            application.setShowing(false);
+            application.stopService(new Intent(application, BackgroundService.class));
+        }
+
+    }
+
+    public static class BackgroundService extends Service {
+
+        @Override
+        public IBinder onBind(Intent intent) {
+            return null;
         }
 
     }

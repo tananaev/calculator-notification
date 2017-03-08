@@ -57,7 +57,6 @@ public class MainApplication extends Application {
     }
 
     public void showNotification() {
-
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         remoteViewsSmall = new RemoteViews(getPackageName(), R.layout.view_calculator_small);
@@ -89,9 +88,13 @@ public class MainApplication extends Application {
         remoteViewsLarge.setTextViewText(R.id.view_display, value);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);
-
         startService(new Intent(this, BackgroundService.class));
+    }
 
+    public void hideNotification() {
+        notificationManager.cancel(NOTIFICATION_ID);
+        setShowing(false);
+        stopService(new Intent(this, BackgroundService.class));
     }
 
     public void addCharacter(int buttonId) {
@@ -244,8 +247,7 @@ public class MainApplication extends Application {
         @Override
         public void onReceive(Context context, Intent intent) {
             MainApplication application = (MainApplication) context.getApplicationContext();
-            application.setShowing(false);
-            application.stopService(new Intent(application, BackgroundService.class));
+            application.hideNotification();
         }
 
     }

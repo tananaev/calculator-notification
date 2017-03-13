@@ -7,12 +7,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_large_display_height"
-        android:paddingLeft="@dimen/view_large_display_padding"
-        android:paddingStart="@dimen/view_large_display_padding"
-        android:paddingRight="@dimen/view_large_display_padding"
-        android:paddingEnd="@dimen/view_large_display_padding"
+        android:background="@color/colorBackgroundDisplay"
         android:orientation="horizontal"
-        android:background="@color/colorBackgroundDisplay">
+        android:paddingEnd="@dimen/view_large_display_padding"
+        android:paddingLeft="@dimen/view_large_display_padding"
+        android:paddingRight="@dimen/view_large_display_padding"
+        android:paddingStart="@dimen/view_large_display_padding">
 
         <TextView
             android:id="@+id/view_display"
@@ -22,31 +22,44 @@
             android:gravity="center_vertical"
             android:maxLines="1"
             android:textAppearance="@style/LargeNotificationText"
-            android:textColor="@color/colorText" />
+            android:textColor="@color/colorText"/>
 
         <ImageView
             android:id="@+id/button_copy"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingLeft="@dimen/image_padding"
-            android:paddingStart="@dimen/image_padding"
-            android:paddingRight="@dimen/image_padding"
-            android:paddingEnd="@dimen/image_padding"
             android:background="?android:selectableItemBackground"
             android:clickable="true"
-            android:src="@drawable/ic_copy_large" />
+            android:paddingEnd="@dimen/image_padding"
+            android:paddingLeft="@dimen/image_padding"
+            android:paddingRight="@dimen/image_padding"
+            android:paddingStart="@dimen/image_padding"
+            android:src="@drawable/ic_copy_large"/>
 
         <ImageView
             android:id="@+id/button_paste"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingLeft="@dimen/image_padding"
-            android:paddingStart="@dimen/image_padding"
-            android:paddingRight="@dimen/image_padding"
-            android:paddingEnd="@dimen/image_padding"
             android:background="?android:selectableItemBackground"
             android:clickable="true"
-            android:src="@drawable/ic_paste_large" />
+            android:paddingEnd="@dimen/image_padding"
+            android:paddingLeft="@dimen/image_padding"
+            android:paddingRight="@dimen/image_padding"
+            android:paddingStart="@dimen/image_padding"
+            android:src="@drawable/ic_paste_large"/>
+
+        <ImageView
+            android:id="@+id/button_dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackground"
+            android:clickable="true"
+            android:paddingEnd="@dimen/image_padding"
+            android:paddingLeft="@dimen/image_padding"
+            android:paddingRight="@dimen/image_padding"
+            android:paddingStart="@dimen/image_padding"
+            android:src="@drawable/ic_close"
+            android:tint="#757575"/>
 
     </LinearLayout>
 

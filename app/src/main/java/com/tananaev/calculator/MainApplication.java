@@ -67,7 +67,7 @@ public class MainApplication extends Application {
                 R.id.digit_5, R.id.digit_6, R.id.digit_7, R.id.digit_8, R.id.digit_9,
                 R.id.button_clear, R.id.button_delete, R.id.button_dot, R.id.button_equal,
                 R.id.button_divide, R.id.button_multiply, R.id.button_subtract, R.id.button_add,
-                R.id.button_copy, R.id.button_paste);
+                R.id.button_copy, R.id.button_paste, R.id.button_dismiss);
 
         for (int viewId : buttons) {
             remoteViewsSmall.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
@@ -81,6 +81,7 @@ public class MainApplication extends Application {
                 .setTicker(getString(R.string.notification_title))
                 .setContent(remoteViewsSmall)
                 .setCustomBigContentView(remoteViewsLarge)
+                .setOngoing(true)
                 .setDeleteIntent(PendingIntent.getBroadcast(
                         this, REQUEST_DISMISS, new Intent(BROADCAST_DISMISS), 0));
 
@@ -222,6 +223,9 @@ public class MainApplication extends Application {
                         }
                     }
                     break;
+                case R.id.button_dismiss:
+                    hideNotification();
+                    return;
                 default:
                     addCharacter(buttonId);
                     break;

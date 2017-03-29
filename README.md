@@ -1,6 +1,6 @@
 # Calculator Notification
 
-[![](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.tananaev.calculator)
+[![Get it on Google Play](http://www.tananaev.com/badges/google-play.svg)](https://play.google.com/store/apps/details?id=com.tananaev.calculator)
 
 Calculator application in the Android notification drawer.
 

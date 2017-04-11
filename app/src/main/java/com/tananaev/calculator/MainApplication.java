@@ -38,6 +38,13 @@ public class MainApplication extends Application {
 
     private String value = "";
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
     @SuppressLint("NewApi")
     public void setTile(Tile tile) {
         this.tile = tile;
@@ -57,8 +64,6 @@ public class MainApplication extends Application {
     }
 
     public void showNotification() {
-        clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         remoteViewsSmall = new RemoteViews(getPackageName(), R.layout.view_calculator_small);
         remoteViewsLarge = new RemoteViews(getPackageName(), R.layout.view_calculator_large);
 

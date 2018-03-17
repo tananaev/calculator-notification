@@ -2,6 +2,7 @@ package com.tananaev.calculator;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -10,6 +11,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.service.quicksettings.Tile;
 import android.support.v4.app.NotificationCompat;
@@ -26,6 +28,7 @@ public class MainApplication extends Application {
     private static final String EXTRA_ID = "id";
     private static final String BROADCAST_BUTTON = "CalculatorButton";
     private static final String BROADCAST_DISMISS = "CalculatorDismiss";
+    private static final String CHANNEL_ID = "CalculatorChannel";
     private static final int DECIMAL_PRECISION = 12;
 
     private ClipboardManager clipboardManager;
@@ -43,6 +46,12 @@ public class MainApplication extends Application {
         super.onCreate();
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID, getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     @SuppressLint("NewApi")
@@ -81,7 +90,7 @@ public class MainApplication extends Application {
                     this, viewId, new Intent(BROADCAST_BUTTON).putExtra(EXTRA_ID, viewId), 0));
         }
 
-        notificationBuilder = new NotificationCompat.Builder(this)
+        notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setTicker(getString(R.string.notification_title))
                 .setContent(remoteViewsSmall)

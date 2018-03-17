@@ -21,22 +21,10 @@
         </activity>
 
         <receiver
-            android:name=".MainApplication$ButtonReceiver"
-            android:exported="false">
-
-            <intent-filter>
-                <action android:name="CalculatorButton" />
-            </intent-filter>
-        </receiver>
+            android:name=".MainApplication$ButtonReceiver" />
 
         <receiver
-            android:name=".MainApplication$DismissReceiver"
-            android:exported="false">
-
-            <intent-filter>
-                <action android:name="CalculatorDismiss" />
-            </intent-filter>
-        </receiver>
+            android:name=".MainApplication$DismissReceiver" />
 
         <service
             android:name=".MainTileService"

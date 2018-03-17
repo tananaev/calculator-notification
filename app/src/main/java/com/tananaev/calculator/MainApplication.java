@@ -26,8 +26,6 @@ public class MainApplication extends Application {
     private static final int NOTIFICATION_ID = 1;
     private static final int REQUEST_DISMISS = 1;
     private static final String EXTRA_ID = "id";
-    private static final String BROADCAST_BUTTON = "CalculatorButton";
-    private static final String BROADCAST_DISMISS = "CalculatorDismiss";
     private static final String CHANNEL_ID = "CalculatorChannel";
     private static final int DECIMAL_PRECISION = 12;
 
@@ -49,7 +47,7 @@ public class MainApplication extends Application {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
-                    CHANNEL_ID, getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+                    CHANNEL_ID, getString(R.string.channel_name), NotificationManager.IMPORTANCE_LOW);
             notificationManager.createNotificationChannel(channel);
         }
     }
@@ -85,9 +83,9 @@ public class MainApplication extends Application {
 
         for (int viewId : buttons) {
             remoteViewsSmall.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
-                    this, viewId, new Intent(BROADCAST_BUTTON).putExtra(EXTRA_ID, viewId), 0));
+                    this, viewId, new Intent(this, ButtonReceiver.class).putExtra(EXTRA_ID, viewId), 0));
             remoteViewsLarge.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
-                    this, viewId, new Intent(BROADCAST_BUTTON).putExtra(EXTRA_ID, viewId), 0));
+                    this, viewId, new Intent(this, ButtonReceiver.class).putExtra(EXTRA_ID, viewId), 0));
         }
 
         notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -96,7 +94,7 @@ public class MainApplication extends Application {
                 .setContent(remoteViewsSmall)
                 .setCustomBigContentView(remoteViewsLarge)
                 .setDeleteIntent(PendingIntent.getBroadcast(
-                        this, REQUEST_DISMISS, new Intent(BROADCAST_DISMISS), 0));
+                        this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0));
 
         remoteViewsSmall.setTextViewText(R.id.view_display, value);
         remoteViewsLarge.setTextViewText(R.id.view_display, value);

@@ -18,8 +18,10 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class MainApplication extends Application {
 
@@ -192,7 +194,7 @@ public class MainApplication extends Application {
 
     private void calculateExpression() {
         if (!value.isEmpty()) {
-            DecimalFormat decimalFormat = new DecimalFormat();
+            DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
             decimalFormat.setMinimumFractionDigits(0);
             decimalFormat.setMaximumFractionDigits(DECIMAL_PRECISION);
             decimalFormat.setGroupingUsed(false);

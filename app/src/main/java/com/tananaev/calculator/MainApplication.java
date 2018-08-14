@@ -1,6 +1,5 @@
 package com.tananaev.calculator;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,10 +10,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.service.quicksettings.Tile;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.text.DecimalFormat;
@@ -30,7 +32,9 @@ public class MainApplication extends Application {
     private static final String EXTRA_ID = "id";
     private static final String CHANNEL_ID = "CalculatorChannel";
     private static final int DECIMAL_PRECISION = 12;
+    private static final String P_VALUE_KEY = "VALUE";
 
+    private SharedPreferences mSharedPreferences;
     private ClipboardManager clipboardManager;
     private NotificationManager notificationManager;
     private RemoteViews remoteViewsSmall;
@@ -44,6 +48,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -52,27 +57,7 @@ public class MainApplication extends Application {
                     CHANNEL_ID, getString(R.string.channel_name), NotificationManager.IMPORTANCE_LOW);
             notificationManager.createNotificationChannel(channel);
         }
-    }
 
-    @SuppressLint("NewApi")
-    public void setTile(Tile tile) {
-        this.tile = tile;
-        if (tile != null) {
-            tile.setState(showing ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-            tile.updateTile();
-        }
-    }
-
-    @SuppressLint("NewApi")
-    public void setShowing(boolean showing) {
-        this.showing = showing;
-        if (this.tile != null) {
-            this.tile.setState(showing ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-            this.tile.updateTile();
-        }
-    }
-
-    public void showNotification() {
         remoteViewsSmall = new RemoteViews(getPackageName(), R.layout.view_calculator_small);
         remoteViewsLarge = new RemoteViews(getPackageName(), R.layout.view_calculator_large);
 
@@ -98,11 +83,34 @@ public class MainApplication extends Application {
                 .setDeleteIntent(PendingIntent.getBroadcast(
                         this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0));
 
+        // restore last value from prefs
+        value = mSharedPreferences.getString(P_VALUE_KEY, "");
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
+        if (tile != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                tile.setState(showing ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+                tile.updateTile();
+            }
+        }
+    }
+
+    public void setShowing(boolean showing) {
+        this.showing = showing;
+        setTile(tile);
+    }
+
+    public void showNotification() {
         remoteViewsSmall.setTextViewText(R.id.view_display, value);
         remoteViewsLarge.setTextViewText(R.id.view_display, value);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);
-        startService(new Intent(this, BackgroundService.class));
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            // keep application alive with a background service works only on pre Oreo
+            startService(new Intent(this, BackgroundService.class));
+        }
     }
 
     public void hideNotification() {
@@ -243,6 +251,13 @@ public class MainApplication extends Application {
             remoteViewsSmall.setTextViewText(R.id.view_display, value);
             remoteViewsLarge.setTextViewText(R.id.view_display, value);
             notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+
+            // store current value to prefs
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putString(P_VALUE_KEY, value);
+            editor.apply();
+        } else {
+            Log.e("MainApplication", "notificationManager or notificationBuilder is null");
         }
     }
 

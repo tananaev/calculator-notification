@@ -32,7 +32,7 @@ public class MainApplication extends Application {
     private static final String EXTRA_ID = "id";
     private static final String CHANNEL_ID = "CalculatorChannel";
     private static final int DECIMAL_PRECISION = 12;
-    private static final String P_VALUE_KEY = "VALUE";
+    private static final String KEY_VALUE = "value";
 
     private SharedPreferences mSharedPreferences;
     private ClipboardManager clipboardManager;
@@ -83,8 +83,7 @@ public class MainApplication extends Application {
                 .setDeleteIntent(PendingIntent.getBroadcast(
                         this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0));
 
-        // restore last value from prefs
-        value = mSharedPreferences.getString(P_VALUE_KEY, "");
+        value = mSharedPreferences.getString(KEY_VALUE, "");
     }
 
     public void setTile(Tile tile) {
@@ -108,7 +107,6 @@ public class MainApplication extends Application {
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            // keep application alive with a background service works only on pre Oreo
             startService(new Intent(this, BackgroundService.class));
         }
     }
@@ -252,12 +250,9 @@ public class MainApplication extends Application {
             remoteViewsLarge.setTextViewText(R.id.view_display, value);
             notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
 
-            // store current value to prefs
-            SharedPreferences.Editor editor = mSharedPreferences.edit();
-            editor.putString(P_VALUE_KEY, value);
-            editor.apply();
+            mSharedPreferences.edit().putString(KEY_VALUE, value).apply();
         } else {
-            Log.e("MainApplication", "notificationManager or notificationBuilder is null");
+            Log.e(MainApplication.class.getSimpleName(), "Application is not initialized");
         }
     }
 

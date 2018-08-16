@@ -1,6 +1,7 @@
 package com.tananaev.calculator;
 
 import android.app.Application;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -81,8 +82,13 @@ public class MainApplication extends Application {
                 .setContent(remoteViewsSmall)
                 .setCustomBigContentView(remoteViewsLarge)
                 .setDeleteIntent(PendingIntent.getBroadcast(
-                        this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0));
-
+                        this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0))
+                .setOngoing(mSharedPreferences.getBoolean(PrefsFragment.KEY_ONGOING, false));
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			notificationBuilder.setVisibility(
+					mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
+							Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+		}
         value = mSharedPreferences.getString(KEY_VALUE, "");
     }
 
@@ -104,6 +110,12 @@ public class MainApplication extends Application {
     public void showNotification() {
         remoteViewsSmall.setTextViewText(R.id.view_display, value);
         remoteViewsLarge.setTextViewText(R.id.view_display, value);
+        notificationBuilder.setOngoing(mSharedPreferences.getBoolean(PrefsFragment.KEY_ONGOING, false));
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			notificationBuilder.setVisibility(
+					mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
+							Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+		}
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {

@@ -25,4 +25,10 @@
     <string name="button_subtract">-</string>
     <string name="button_add">+</string>
 
+    <string name="pref_notification">Notification settings</string>
+    <string name="pref_ongoing_title">Ongoing notification</string>
+    <string name="pref_ongoing_summary">Calculator Notification can not be dismissed</string>
+    <string name="pref_lock_screen_title">Lock screen notification</string>
+    <string name="pref_lock_screen_summary">Show Calculator Notification on lock screen</string>
+
 </resources>

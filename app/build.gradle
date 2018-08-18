@@ -7,7 +7,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 8
-        versionName "1.8pre2"
+        versionName "1.8pre3"
     }
 }
 

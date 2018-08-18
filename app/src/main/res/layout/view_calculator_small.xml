@@ -47,6 +47,18 @@
             android:background="?android:selectableItemBackground"
             android:src="@drawable/ic_paste_small" />
 
+        <ImageView
+            android:id="@+id/button_dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/image_padding"
+            android:paddingStart="@dimen/image_padding"
+            android:paddingRight="@dimen/image_padding"
+            android:paddingEnd="@dimen/image_padding"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_close"
+            android:tint="#757575" />
+
     </LinearLayout>
 
     <LinearLayout

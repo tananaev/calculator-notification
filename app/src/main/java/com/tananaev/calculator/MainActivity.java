@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(MainActivity.class.getSimpleName(), "onCreate()");
         super.onCreate(savedInstanceState);
-        ((MainApplication) getApplication()).showNotification();
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new PrefsFragment())
                 .commit();
@@ -24,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onStart() {
         Log.v(MainActivity.class.getSimpleName(), "onStart()");
         super.onStart();
+        ((MainApplication) getApplication()).showNotification();
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
     }

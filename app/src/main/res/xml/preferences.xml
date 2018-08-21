@@ -12,6 +12,6 @@
             android:title="@string/pref_lock_screen_title"
             android:summary="@string/pref_lock_screen_summary"
             android:defaultValue="false" />
-	</PreferenceCategory>
+    </PreferenceCategory>
 
 </PreferenceScreen>

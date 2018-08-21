@@ -86,11 +86,11 @@ public class MainApplication extends Application {
                 .setDeleteIntent(PendingIntent.getBroadcast(
                         this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0))
                 .setOngoing(mSharedPreferences.getBoolean(PrefsFragment.KEY_ONGOING, false));
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			notificationBuilder.setVisibility(
-					mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
-							Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
-		}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            notificationBuilder.setVisibility(
+                    mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
+                            Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+        }
         value = mSharedPreferences.getString(KEY_VALUE, "");
     }
 
@@ -122,11 +122,11 @@ public class MainApplication extends Application {
             remoteViewsSmall.setViewVisibility(R.id.button_dismiss, View.GONE);
             remoteViewsLarge.setViewVisibility(R.id.button_dismiss, View.GONE);
         }
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			notificationBuilder.setVisibility(
-					mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
-							Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
-		}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            notificationBuilder.setVisibility(
+                    mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
+                            Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+        }
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {

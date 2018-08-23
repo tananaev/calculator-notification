@@ -56,7 +56,7 @@
             android:paddingRight="@dimen/image_padding"
             android:paddingEnd="@dimen/image_padding"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/ic_close_small"
             android:tint="#757575" />
 
     </LinearLayout>

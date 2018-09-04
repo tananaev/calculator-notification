@@ -49,7 +49,6 @@ public class MainApplication extends Application {
 
     @Override
     public void onCreate() {
-        Log.v(MainApplication.class.getSimpleName(), "onCreate()");
         super.onCreate();
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -110,7 +109,6 @@ public class MainApplication extends Application {
     }
 
     public void showNotification() {
-        Log.v(MainApplication.class.getSimpleName(), "showNotification()");
         remoteViewsSmall.setTextViewText(R.id.view_display, value);
         remoteViewsLarge.setTextViewText(R.id.view_display, value);
         if (mSharedPreferences.getBoolean(PrefsFragment.KEY_ONGOING, false)) {

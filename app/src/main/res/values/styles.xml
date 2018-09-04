@@ -1,6 +1,5 @@
 <resources>
 
-    <!--style name="AppTheme" parent="@android:style/Theme.Translucent.NoTitleBar"-->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
     </style>
 

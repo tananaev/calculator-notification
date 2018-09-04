@@ -11,9 +11,11 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new PrefsFragment())
-                .commit();
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .replace(android.R.id.content, new PrefsFragment())
+                    .commit();
+        }
     }
 
     @Override

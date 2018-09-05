@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
     </style>
 
     <style name="SmallNotificationText" parent="@android:style/TextAppearance">

@@ -1,6 +1,7 @@
 package com.tananaev.calculator;
 
 import android.app.Application;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -17,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.service.quicksettings.Tile;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import java.text.DecimalFormat;
@@ -66,7 +68,7 @@ public class MainApplication extends Application {
                 R.id.digit_5, R.id.digit_6, R.id.digit_7, R.id.digit_8, R.id.digit_9,
                 R.id.button_clear, R.id.button_delete, R.id.button_dot, R.id.button_equal,
                 R.id.button_divide, R.id.button_multiply, R.id.button_subtract, R.id.button_add,
-                R.id.button_copy, R.id.button_paste);
+                R.id.button_copy, R.id.button_paste, R.id.button_dismiss);
 
         for (int viewId : buttons) {
             remoteViewsSmall.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
@@ -81,8 +83,13 @@ public class MainApplication extends Application {
                 .setContent(remoteViewsSmall)
                 .setCustomBigContentView(remoteViewsLarge)
                 .setDeleteIntent(PendingIntent.getBroadcast(
-                        this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0));
-
+                        this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0))
+                .setOngoing(mSharedPreferences.getBoolean(PrefsFragment.KEY_ONGOING, false));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            notificationBuilder.setVisibility(
+                    mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
+                            Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+        }
         value = mSharedPreferences.getString(KEY_VALUE, "");
     }
 
@@ -104,6 +111,20 @@ public class MainApplication extends Application {
     public void showNotification() {
         remoteViewsSmall.setTextViewText(R.id.view_display, value);
         remoteViewsLarge.setTextViewText(R.id.view_display, value);
+        if (mSharedPreferences.getBoolean(PrefsFragment.KEY_ONGOING, false)) {
+            notificationBuilder.setOngoing(true);
+            remoteViewsSmall.setViewVisibility(R.id.button_dismiss, View.VISIBLE);
+            remoteViewsLarge.setViewVisibility(R.id.button_dismiss, View.VISIBLE);
+        } else {
+            notificationBuilder.setOngoing(false);
+            remoteViewsSmall.setViewVisibility(R.id.button_dismiss, View.GONE);
+            remoteViewsLarge.setViewVisibility(R.id.button_dismiss, View.GONE);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            notificationBuilder.setVisibility(
+                    mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
+                            Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+        }
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
@@ -242,6 +263,9 @@ public class MainApplication extends Application {
                         }
                     }
                     break;
+                case R.id.button_dismiss:
+                    hideNotification();
+                    return;
                 default:
                     addCharacter(buttonId);
                     break;

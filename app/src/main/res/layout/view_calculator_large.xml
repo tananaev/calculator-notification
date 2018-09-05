@@ -33,8 +33,7 @@
             android:paddingRight="@dimen/image_padding"
             android:paddingEnd="@dimen/image_padding"
             android:background="?android:selectableItemBackground"
-            android:clickable="true"
-            android:src="@drawable/ic_copy_large" />
+            android:src="@drawable/ic_copy" />
 
         <ImageView
             android:id="@+id/button_paste"
@@ -45,8 +44,18 @@
             android:paddingRight="@dimen/image_padding"
             android:paddingEnd="@dimen/image_padding"
             android:background="?android:selectableItemBackground"
-            android:clickable="true"
-            android:src="@drawable/ic_paste_large" />
+            android:src="@drawable/ic_paste" />
+
+        <ImageView
+            android:id="@+id/button_dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/image_padding"
+            android:paddingStart="@dimen/image_padding"
+            android:paddingRight="@dimen/image_padding"
+            android:paddingEnd="@dimen/image_padding"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_close" />
 
     </LinearLayout>
 
@@ -54,7 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorBackgroundNumbers">
+        android:background="@color/colorBackgroundNumbers"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"

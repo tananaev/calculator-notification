@@ -16,7 +16,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.service.quicksettings.Tile;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -88,7 +88,7 @@ public class MainApplication extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notificationBuilder.setVisibility(
                     mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
-                            Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+                            NotificationCompat.VISIBILITY_PUBLIC : NotificationCompat.VISIBILITY_SECRET);
         }
         value = mSharedPreferences.getString(KEY_VALUE, "");
     }
@@ -123,7 +123,7 @@ public class MainApplication extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notificationBuilder.setVisibility(
                     mSharedPreferences.getBoolean(PrefsFragment.KEY_LOCK_SCREEN, false) ?
-                            Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET);
+                            NotificationCompat.VISIBILITY_PUBLIC : NotificationCompat.VISIBILITY_SECRET);
         }
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
         setShowing(true);

@@ -22,7 +22,7 @@
     <string name="button_equal">=</string>
     <string name="button_divide">÷</string>
     <string name="button_multiply">×</string>
-    <string name="button_subtract">-</string>
+    <string name="button_subtract">−</string>
     <string name="button_add">+</string>
 
     <string name="pref_notification">Notification settings</string>

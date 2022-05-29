@@ -1,7 +1,6 @@
 package com.tananaev.calculator;
 
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -70,11 +69,12 @@ public class MainApplication extends Application {
                 R.id.button_divide, R.id.button_multiply, R.id.button_subtract, R.id.button_add,
                 R.id.button_copy, R.id.button_paste, R.id.button_dismiss);
 
+        int intentFlag = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0;
         for (int viewId : buttons) {
             remoteViewsSmall.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
-                    this, viewId, new Intent(this, ButtonReceiver.class).putExtra(EXTRA_ID, viewId), 0));
+                    this, viewId, new Intent(this, ButtonReceiver.class).putExtra(EXTRA_ID, viewId), intentFlag));
             remoteViewsLarge.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(
-                    this, viewId, new Intent(this, ButtonReceiver.class).putExtra(EXTRA_ID, viewId), 0));
+                    this, viewId, new Intent(this, ButtonReceiver.class).putExtra(EXTRA_ID, viewId), intentFlag));
         }
 
         notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -83,7 +83,7 @@ public class MainApplication extends Application {
                 .setContent(remoteViewsSmall)
                 .setCustomBigContentView(remoteViewsLarge)
                 .setDeleteIntent(PendingIntent.getBroadcast(
-                        this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), 0))
+                        this, REQUEST_DISMISS, new Intent(this, DismissReceiver.class), intentFlag))
                 .setOngoing(mSharedPreferences.getBoolean(PrefsFragment.KEY_ONGOING, false));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notificationBuilder.setVisibility(

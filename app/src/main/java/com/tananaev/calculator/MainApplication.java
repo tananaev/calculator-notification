@@ -187,35 +187,35 @@ public class MainApplication extends Application {
                 character = '+';
                 break;
         }
-        if (validateCharacter(character)) {
+        if (validateCharacter(character) == 1) {  // 1 = True, 0 = False, -1 = Special Case (add 0 before point)
             value += character;
+        } else if (validateCharacter(character) == -1) {
+            value += '0.';
         }
     }
 
-    private boolean validateCharacter(char character) {
+    private int validateCharacter(char character) {
         if (Character.isDigit(character)) {
-            return true;
+            return 1;
         }
         switch (character) {
             case '.':
                 if (value.isEmpty()) {
-                    return false;
+                    return -1;
                 }
-                int index = value.length() - 1;
-                while (index >= 0 && Character.isDigit(value.charAt(index))) {
-                    index -= 1;
-                }
-                return index < 0 || value.charAt(index) != '.';
+                for (int index = value.length()-1; index >= 0 && Character.isDigit(value.charAt(index)); index--) {} // Going through all entered values until symbol
+
+                return index < 0 ? -1 : value.charAt(index) != '.' ? -1 : 0;  // If nothing entered add 0 before point else either do nothing because there is a dot or add same
             case '-':
             case '+':
                 if (value.isEmpty()) {
-                    return true;
+                    return 1;
                 }
             case '*':
             case '/':
                 return !value.isEmpty() && Character.isDigit(value.charAt(value.length() - 1));
             default:
-                return false;
+                return 0;
         }
     }
 
@@ -255,8 +255,10 @@ public class MainApplication extends Application {
                             if (data != null) {
                                 for (int i = 0; i < data.length(); i++) {
                                     char character = data.charAt(i);
-                                    if (validateCharacter(character)) {
+                                    if (validateCharacter(character) == 1) {
                                         value += character;
+                                    } else if (validateCharacter(character) == -1) {
+                                        value += '0.';
                                     }
                                 }
                             }

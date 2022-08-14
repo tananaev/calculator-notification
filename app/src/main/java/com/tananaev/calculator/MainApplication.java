@@ -255,8 +255,10 @@ public class MainApplication extends Application {
                             if (data != null) {
                                 for (int i = 0; i < data.length(); i++) {
                                     char character = data.charAt(i);
-                                    if (validateCharacter(character)) {
+                                    if (validateCharacter(character) == 1) {
                                         value += character;
+                                    } else if (validateCharacter(character) == -1) {
+                                        value += '0.';
                                     }
                                 }
                             }

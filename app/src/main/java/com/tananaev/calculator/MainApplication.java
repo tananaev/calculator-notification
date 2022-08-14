@@ -187,35 +187,38 @@ public class MainApplication extends Application {
                 character = '+';
                 break;
         }
-        if (validateCharacter(character)) {
+        if (validateCharacter(character) == 1) {
             value += character;
+        } else if (validateCharacter(character) == -1) {
+            value += '0.';
         }
     }
 
-    private boolean validateCharacter(char character) {
+    private int validateCharacter(char character) {
         if (Character.isDigit(character)) {
-            return true;
+            return 1;
         }
         switch (character) {
             case '.':
                 if (value.isEmpty()) {
-                    return false;
+                    return -1;
                 }
-                int index = value.length() - 1;
-                while (index >= 0 && Character.isDigit(value.charAt(index))) {
-                    index -= 1;
-                }
-                return index < 0 || value.charAt(index) != '.';
+                for (int index = value.length()-1; index >= 0 && Character.isDigit(value.charAt(index)); index--) {} // Going through all entered values
+
+
+
+
+                return index < 0 ? -1 : value.charAt(index) != '.' ? -1 : 0;  // If it is empty or the last value is a operator
             case '-':
             case '+':
                 if (value.isEmpty()) {
-                    return true;
+                    return 1;
                 }
             case '*':
             case '/':
                 return !value.isEmpty() && Character.isDigit(value.charAt(value.length() - 1));
             default:
-                return false;
+                return 0;
         }
     }
 

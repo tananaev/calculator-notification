@@ -187,7 +187,7 @@ public class MainApplication extends Application {
                 character = '+';
                 break;
         }
-        if (validateCharacter(character) == 1) {
+        if (validateCharacter(character) == 1) {  // 1 = True, 0 = False, -1 = Special Case (add 0 before point)
             value += character;
         } else if (validateCharacter(character) == -1) {
             value += '0.';
@@ -203,12 +203,9 @@ public class MainApplication extends Application {
                 if (value.isEmpty()) {
                     return -1;
                 }
-                for (int index = value.length()-1; index >= 0 && Character.isDigit(value.charAt(index)); index--) {} // Going through all entered values
+                for (int index = value.length()-1; index >= 0 && Character.isDigit(value.charAt(index)); index--) {} // Going through all entered values until symbol
 
-
-
-
-                return index < 0 ? -1 : value.charAt(index) != '.' ? -1 : 0;  // If it is empty or the last value is a operator
+                return index < 0 ? -1 : value.charAt(index) != '.' ? -1 : 0;  // If nothing entered add 0 before point else either do nothing because there is a dot or add same
             case '-':
             case '+':
                 if (value.isEmpty()) {

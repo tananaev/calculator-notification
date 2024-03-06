@@ -1,6 +1,6 @@
 # Calculator Notification
 
-[![Get it on Google Play](http://www.tananaev.com/badges/google-play.svg)](https://play.google.com/store/apps/details?id=com.tananaev.calculator)
+[![Get it on F-Droid](https://www.tananaev.com/badges/f-droid.svg)](https://f-droid.org/en/packages/com.tananaev.calculator/)
 
 Calculator application in the Android notification drawer.
 
